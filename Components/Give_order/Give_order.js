@@ -3,6 +3,8 @@ import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppRegistry } from "react-native";
 import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class Give_order extends Component {
   constructor(props) {
@@ -71,4 +73,3 @@ class Give_order extends Component {
 }
 
 export default Give_order;
-AppRegistry.registerComponent(Give_order, () => Give_order);

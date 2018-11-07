@@ -1,23 +1,19 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppRegistry } from "react-native";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class All_orders_given extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      orders: [
-        { name: "shivam", quantity: 100, date: "18/10/2018" },
-        { name: "shiv", quantity: 1005, date: "19/10/2018" }
-      ]
-    };
   }
 
   render() {
     return (
       <View>
-        {this.state.orders.map(each => (
-          <View>
+        {this.props.order_given_reducer.map(each => (
+          <View key={each.id}>
             <Text>{each.name}</Text>
             <Text>{each.quantity}</Text>
             <Text>{each.date}</Text>
@@ -28,5 +24,9 @@ class All_orders_given extends Component {
   }
 }
 
-export default All_orders_given;
-AppRegistry.registerComponent(All_orders_given, () => All_orders_given);
+function mapStateToProps(state) {
+  return {
+    order_given_reducer: state.order_given_reducer
+  };
+}
+export default connect(mapStateToProps)(All_orders_given);

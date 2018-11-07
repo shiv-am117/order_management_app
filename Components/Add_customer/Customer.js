@@ -3,6 +3,8 @@ import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
 import { AppRegistry } from "react-native";
 import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class Customer extends Component {
   constructor(props) {
@@ -112,6 +114,9 @@ class Customer extends Component {
     );
   }
 }
-
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  };
+}
 export default Customer;
-AppRegistry.registerComponent(Customer, () => Customer);

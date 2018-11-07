@@ -51,22 +51,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "blue"
+    alignItems: "center"
   },
   customer_order: {
     flexDirection: "column",
     flex: 3,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "red"
+    backgroundColor: "#42e5f4"
   },
   order_given: {
     flexDirection: "column",
     flex: 3,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "green"
+    backgroundColor: "#f4b241"
   },
   add_customer_order: {
     flexDirection: "column",
@@ -82,10 +81,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "pink"
   },
-  head_text: { fontSize: 30 },
+  head_text: {
+    fontSize: 30,
+
+    fontFamily: "cursive"
+  },
   display_text: { fontSize: 30 },
   add_text: { fontSize: 30 }
 });
 export default Main;
-
-AppRegistry.registerComponent(Main, () => Main);
