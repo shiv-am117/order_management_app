@@ -5,6 +5,7 @@ import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { order_given } from "../../actions/index";
 
 class Give_order extends Component {
   constructor(props) {
@@ -12,8 +13,25 @@ class Give_order extends Component {
   }
   state = {
     name: "",
-    quantity: null,
-    date: null
+    quantity: "",
+    date: "",
+    message: ""
+  };
+
+  nav = () => {
+    this.props.navigation.navigate("main");
+  };
+  giveorder = () => {
+    if (
+      this.state.name === "" ||
+      this.state.quantity === "" ||
+      this.state.date === ""
+    ) {
+      this.setState({ message: "Fill all of above" });
+    } else {
+      this.nav();
+      this.props.order_given(this.state);
+    }
   };
 
   render() {
@@ -27,6 +45,7 @@ class Give_order extends Component {
 
         <TextInput
           style={{ height: 40 }}
+          keyboardType="numeric"
           placeholder="Enter quantity !"
           onChangeText={text => this.setState({ quantity: text })}
         />
@@ -60,16 +79,34 @@ class Give_order extends Component {
           />
         </View>
         <Text>{"\n"}</Text>
-        <Button title="Give Order" color="#841584" />
+        <Button title="Give Order" color="#841584" onPress={this.giveorder} />
         <Text>{"\n"}</Text>
         <Button
           title="Cancel"
           color="red"
           onPress={() => this.props.navigation.goBack()}
         />
+        <Text>{"\n"}</Text>
+        <Text>{"\n"}</Text>
+        <Text style={{ color: "red", fontSize: 20 }}>{this.state.message}</Text>
       </View>
     );
   }
 }
-
-export default Give_order;
+function mapStateToProps(state) {
+  return {
+    order_given_reducer: state.order_given_reducer
+  };
+}
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      order_given: order_given
+    },
+    dispatch
+  );
+}
+export default connect(
+  mapStateToProps,
+  matchDispatchToProps
+)(Give_order);

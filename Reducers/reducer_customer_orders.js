@@ -1,20 +1,19 @@
-export default function() {
-  return [
-    {
-      id: 1,
-      name: "shivam",
-      number: 100,
-      money: 100,
-      indate: "18/10/2018",
-      outdate: "18/10/2018"
-    },
-    {
-      id: 2,
-      name: "shiv",
-      number: 1001,
-      money: 1001,
-      indate: "18/10/2018",
-      outdate: "18/10/2018"
-    }
-  ];
-}
+const orders = (state = [], action) => {
+  switch (action.type) {
+    case "new_customer_order":
+      return [
+        ...state,
+        {
+          id: action.id,
+          name: action.payload.name,
+          number: action.payload.number,
+          order: action.payload.order,
+          money: action.payload.money,
+          indate: action.payload.indate,
+          outdate: action.payload.outdate
+        }
+      ];
+  }
+  return state;
+};
+export default orders;

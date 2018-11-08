@@ -5,6 +5,7 @@ import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { neworder } from "../../actions/index";
 
 class Customer extends Component {
   constructor(props) {
@@ -12,13 +13,32 @@ class Customer extends Component {
   }
   state = {
     name: "",
-    number: null,
+    number: "",
     order: "",
-    money: null,
-    indate: null,
-    outdate: null
+    money: "",
+    indate: "",
+    outdate: "",
+    message: ""
   };
 
+  nav = () => {
+    this.props.navigation.navigate("main");
+  };
+  order = () => {
+    if (
+      this.state.name === "" ||
+      this.state.number === "" ||
+      this.state.order === "" ||
+      this.state.money === "" ||
+      this.state.outdate === "" ||
+      this.state.indate === ""
+    ) {
+      this.setState({ message: "Fill all of above" });
+    } else {
+      this.nav();
+      this.props.neworder(this.state);
+    }
+  };
   render() {
     return (
       <View>
@@ -29,6 +49,7 @@ class Customer extends Component {
         />
         <TextInput
           style={{ height: 40 }}
+          keyboardType="numeric"
           placeholder="Enter phone number !"
           onChangeText={text => this.setState({ number: text })}
         />
@@ -39,6 +60,7 @@ class Customer extends Component {
         />
         <TextInput
           style={{ height: 40 }}
+          keyboardType="numeric"
           placeholder="Enter advance money  !"
           onChangeText={text => this.setState({ money: text })}
         />
@@ -99,24 +121,35 @@ class Customer extends Component {
           />
         </View>
         <Text>{"\n"}</Text>
-        <Button
-          title="Add Order"
-          color="#841584"
-          onPress={() => this.updatechild}
-        />
+        <Button title="Add Order" color="#841584" onPress={this.order} />
         <Text>{"\n"}</Text>
         <Button
           title="Cancel"
           color="red"
           onPress={() => this.props.navigation.goBack()}
         />
+        <Text>{"\n"}</Text>
+        <Text>{"\n"}</Text>
+        <Text style={{ color: "red", fontSize: 20 }}>{this.state.message}</Text>
       </View>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    users: state.users
+    customer_orders_reducer: state.customer_orders_reducer
   };
 }
-export default Customer;
+
+function matchDipatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      neworder: neworder
+    },
+    dispatch
+  );
+}
+export default connect(
+  mapStateToProps,
+  matchDipatchToProps
+)(Customer);

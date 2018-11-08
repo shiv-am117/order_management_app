@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
 import { AppRegistry } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -11,15 +19,20 @@ class All_orders_given extends Component {
 
   render() {
     return (
-      <View>
-        {this.props.order_given_reducer.map(each => (
-          <View key={each.id}>
-            <Text>{each.name}</Text>
-            <Text>{each.quantity}</Text>
-            <Text>{each.date}</Text>
-          </View>
-        ))}
-      </View>
+      <ScrollView>
+        <View style={{ backgroundColor: "black" }}>
+          {this.props.order_given_reducer.map(each => (
+            <View key={each.id}>
+              <TouchableOpacity style={styles.item}>
+                <Text>Name : {each.name}</Text>
+                <Text>Quantity : {each.quantity} kg</Text>
+                <Text>Date : {each.date}</Text>
+              </TouchableOpacity>
+              <Text>{"\n"}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -29,4 +42,11 @@ function mapStateToProps(state) {
     order_given_reducer: state.order_given_reducer
   };
 }
+
 export default connect(mapStateToProps)(All_orders_given);
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: "pink"
+  }
+});

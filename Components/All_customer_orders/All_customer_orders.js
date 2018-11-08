@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
 import { AppRegistry } from "react-native";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -11,17 +19,23 @@ class All_customer_orders extends Component {
 
   render() {
     return (
-      <View>
-        {this.props.customer_orders_reducer.map(each => (
-          <View key={each.id}>
-            <Text>{each.name}</Text>
-            <Text>{each.number}</Text>
-            <Text>{each.money}</Text>
-            <Text>{each.indate}</Text>
-            <Text>{each.outdate}</Text>
-          </View>
-        ))}
-      </View>
+      <ScrollView>
+        <View style={{ backgroundColor: "black" }}>
+          {this.props.customer_orders_reducer.map(each => (
+            <View key={each.id}>
+              <TouchableOpacity style={styles.item}>
+                <Text>Name : {each.name}</Text>
+                <Text>Number : {each.number}</Text>
+                <Text>Money : Rs. {each.money}</Text>
+                <Text>Indate :{each.indate}</Text>
+                <Text>outdate :{each.outdate}</Text>
+                <Text>Order :{each.order}</Text>
+              </TouchableOpacity>
+              <Text>{"\n"}</Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -31,3 +45,9 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps)(All_customer_orders);
+
+const styles = StyleSheet.create({
+  item: {
+    backgroundColor: "pink"
+  }
+});

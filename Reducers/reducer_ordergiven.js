@@ -1,6 +1,16 @@
-export default function() {
-  return [
-    { id: 1, name: "shivam", quantity: 100, date: "18/10/2018" },
-    { id: 2, name: "shiv", quantity: 1005, date: "19/10/2018" }
-  ];
-}
+const orders = (state = [], action) => {
+  switch (action.type) {
+    case "new_order_given":
+      return [
+        ...state,
+        {
+          id: action.id,
+          name: action.payload.name,
+          quantity: action.payload.quantity,
+          date: action.payload.date
+        }
+      ];
+  }
+  return state;
+};
+export default orders;
