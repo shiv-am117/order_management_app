@@ -1,15 +1,11 @@
 import React, { Component } from "react";
 import {
-  Platform,
   StyleSheet,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
   ScrollView
 } from "react-native";
-import { AppRegistry } from "react-native";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 class All_orders_given extends Component {
@@ -25,7 +21,7 @@ class All_orders_given extends Component {
             <View key={each.id}>
               <TouchableOpacity style={styles.item}>
                 <Text>Name : {each.name}</Text>
-                <Text>Quantity : {each.quantity} kg</Text>
+                <Text>Quantity : {each.quantity} grams</Text>
                 <Text>Date : {each.date}</Text>
               </TouchableOpacity>
               <Text>{"\n"}</Text>

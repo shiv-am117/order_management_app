@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import {
-  Platform,
   StyleSheet,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
   ScrollView
 } from "react-native";
-import { AppRegistry } from "react-native";
-import { bindActionCreators } from "redux";
+
 import { connect } from "react-redux";
 
 class All_customer_orders extends Component {

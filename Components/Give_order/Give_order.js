@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
-import { AppRegistry } from "react-native";
+import { Text, TextInput, View } from "react-native";
+
 import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { order_given } from "../../actions/index";
 
+var d = new Date();
+var y = d.getFullYear();
+var m = d.getMonth() + 1;
+var date = d.getDate();
+var datestring = date + "-" + m + "-" + y;
 class Give_order extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +19,7 @@ class Give_order extends Component {
   state = {
     name: "",
     quantity: "",
-    date: "",
+    date: datestring,
     message: ""
   };
 
@@ -56,7 +61,7 @@ class Give_order extends Component {
             style={{ width: 200 }}
             date={this.state.date}
             mode="date"
-            placeholder="select date"
+            placeholder="Enter date"
             format="DD-MM-YYYY"
             minDate="05-11-2018"
             maxDate="01-01-2100"

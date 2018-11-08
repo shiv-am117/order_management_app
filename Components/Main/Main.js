@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ImageBackground
 } from "react-native";
-import { AppRegistry } from "react-native";
 
 class Main extends Component {
   constructor(props) {
@@ -29,25 +28,26 @@ class Main extends Component {
               this.props.navigation.navigate("all_customer_orders")
             }
           >
-            <Text style={styles.display_cust_text}>View all Orders</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.order_given}
-            onPress={() => this.props.navigation.navigate("all_orders_given")}
-          >
-            <Text style={styles.display_given_orders}>View Orders Given</Text>
+            <Text style={styles.display_cust_text}>View Customer Orders</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.add_customer_order}
             onPress={() => this.props.navigation.navigate("customer")}
           >
-            <Text style={styles.new_text}>New Order</Text>
+            <Text style={styles.new_text}>New Customer Order</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.order_given}
+            onPress={() => this.props.navigation.navigate("all_orders_given")}
+          >
+            <Text style={styles.display_given_orders}>View Your Orders</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.add_order_given}
             onPress={() => this.props.navigation.navigate("give_order")}
           >
-            <Text style={styles.give_text}>Giving Order</Text>
+            <Text style={styles.give_text}>Your New Order</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
-import { AppRegistry } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { Button } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { neworder } from "../../actions/index";
+
+var d = new Date();
+var y = d.getFullYear();
+var m = d.getMonth() + 1;
+var date = d.getDate();
+var datestring = date + "-" + m + "-" + y;
 
 class Customer extends Component {
   constructor(props) {
@@ -16,7 +21,7 @@ class Customer extends Component {
     number: "",
     order: "",
     money: "",
-    indate: "",
+    indate: datestring,
     outdate: "",
     message: ""
   };
@@ -70,7 +75,7 @@ class Customer extends Component {
             style={{ width: 200 }}
             date={this.state.indate}
             mode="date"
-            placeholder="select date"
+            placeholder="Enter indate"
             format="DD-MM-YYYY"
             minDate="05-11-2018"
             maxDate="01-01-2100"
@@ -98,7 +103,7 @@ class Customer extends Component {
             style={{ width: 200 }}
             date={this.state.outdate}
             mode="date"
-            placeholder="select date"
+            placeholder="Enter outdate"
             format="DD-MM-YYYY"
             minDate="05-11-2018"
             maxDate="01-01-2100"
