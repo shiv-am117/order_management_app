@@ -1,15 +1,30 @@
-const orders = (state = [], action) => {
+initialstate = {
+  id: 0,
+  items: []
+};
+const orders = (state = initialstate, action) => {
   switch (action.type) {
     case "new_order_given":
-      return [
+      console.log(state.id);
+      return {
         ...state,
-        {
-          id: action.id,
-          name: action.payload.name,
-          quantity: action.payload.quantity,
-          date: action.payload.date
-        }
-      ];
+        items: [
+          ...state.items,
+          {
+            id: state.id,
+            name: action.payload.name,
+            quantity: action.payload.quantity,
+            date: action.payload.date
+          }
+        ],
+        id: state.id + 1
+      };
+    case "delete order":
+      return {
+        ...state,
+        items: [...state.items.filter(item => item.id !== action.payload)],
+        id: state.id
+      };
   }
   return state;
 };
