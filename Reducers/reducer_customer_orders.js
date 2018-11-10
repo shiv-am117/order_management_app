@@ -5,7 +5,6 @@ initialstate = {
 const orders = (state = initialstate, action) => {
   switch (action.type) {
     case "new_customer_order":
-      console.log(state.id);
       return {
         ...state,
         items: [
@@ -17,7 +16,9 @@ const orders = (state = initialstate, action) => {
             order: action.payload.order,
             money: action.payload.money,
             indate: action.payload.indate,
-            outdate: action.payload.outdate
+            outdate: action.payload.outdate,
+            given: false,
+            made: false
           }
         ],
         id: state.id + 1
@@ -27,6 +28,23 @@ const orders = (state = initialstate, action) => {
         ...state,
         items: [...state.items.filter(item => item.id !== action.payload)],
         id: state.id
+      };
+    case "updategiven":
+      const index = action.id;
+      console.log(index);
+      return {
+        ...state,
+        items: state.items.map((item, i) =>
+          i === action.id ? { ...item, given: !given } : item
+        )
+      };
+
+    case "updatemade":
+      return {
+        ...state,
+        items: state.items.map((item, i) =>
+          i === action.id ? { ...item, made: !made } : item
+        )
       };
   }
   return state;

@@ -5,7 +5,6 @@ initialstate = {
 const orders = (state = initialstate, action) => {
   switch (action.type) {
     case "new_order_given":
-      console.log(state.id);
       return {
         ...state,
         items: [

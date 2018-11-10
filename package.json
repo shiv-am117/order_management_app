@@ -1,5 +1,5 @@
 {
-  "name": "newproject",
+  "name": "Variety Garments",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "immutability-helper": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-datepicker": "^1.7.2",

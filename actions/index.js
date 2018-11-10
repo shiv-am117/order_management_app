@@ -26,3 +26,15 @@ export const del_cust_order = id => {
     payload: id
   };
 };
+export const updategiven = id => {
+  return {
+    type: "updategiven",
+    id: id
+  };
+};
+export const updatemade = id => {
+  return {
+    type: "updatemade",
+    id: id
+  };
+};

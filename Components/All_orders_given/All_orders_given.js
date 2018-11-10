@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   TouchableOpacity,
   ScrollView
 } from "react-native";
@@ -15,15 +16,28 @@ class All_orders_given extends Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    value: ""
+  };
 
-  componentWillMount() {
-    console.log(this.props.orders);
-  }
+  search = text => {
+    this.setState({
+      value: text
+    });
+  };
   render() {
+    let filteredcust = this.props.orders.filter(cust => {
+      return cust.name.indexOf(this.state.value) != -1;
+    });
     return (
       <ScrollView>
+        <TextInput
+          style={styles.search}
+          placeholder="Type to search"
+          onChangeText={text => this.search(text)}
+        />
         <View style={styles.container}>
-          {this.props.orders.map(each => (
+          {filteredcust.map(each => (
             <View key={each.id}>
               <View style={styles.item}>
                 <Text>Name : {each.name}</Text>
@@ -31,11 +45,12 @@ class All_orders_given extends Component {
                 <Text>Date : {each.date}</Text>
                 <Text style={styles.modlineheight}>{"\n"}</Text>
                 <View style={styles.buttoncontainer}>
-                  <TouchableOpacity>
+                  <TouchableOpacity style={styles.envelope}>
                     <Text style={styles.button}>Edit</Text>
                   </TouchableOpacity>
-                  <Text>{"          "} </Text>
+
                   <TouchableOpacity
+                    style={styles.envelope}
                     onPress={() => this.props.del_order(each.id)}
                   >
                     <Text style={styles.button}>Completed</Text>
@@ -81,7 +96,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "cyan",
     flex: 1,
-    borderRadius: 10
+    borderRadius: 10,
+    textAlign: "center",
+    justifyContent: "center"
   },
   buttoncontainer: {
     flexDirection: "row",
@@ -92,5 +109,11 @@ const styles = StyleSheet.create({
   },
   modlineheight: {
     lineHeight: 1
+  },
+  envelope: {
+    flex: 1
+  },
+  search: {
+    padding: 10
   }
 });
