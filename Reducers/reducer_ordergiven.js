@@ -8,13 +8,13 @@ const orders = (state = initialstate, action) => {
       return {
         ...state,
         items: [
-          ...state.items,
           {
             id: state.id,
             name: action.payload.name,
             quantity: action.payload.quantity,
             date: action.payload.date
-          }
+          },
+          ...state.items
         ],
         id: state.id + 1
       };

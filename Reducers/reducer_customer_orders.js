@@ -8,7 +8,6 @@ const orders = (state = initialstate, action) => {
       return {
         ...state,
         items: [
-          ...state.items,
           {
             id: state.id,
             name: action.payload.name,
@@ -19,7 +18,8 @@ const orders = (state = initialstate, action) => {
             outdate: action.payload.outdate,
             given: false,
             made: false
-          }
+          },
+          ...state.items
         ],
         id: state.id + 1
       };
@@ -34,16 +34,16 @@ const orders = (state = initialstate, action) => {
       console.log(index);
       return {
         ...state,
-        items: state.items.map((item, i) =>
-          i === action.id ? { ...item, given: !given } : item
+        items: state.items.map(item =>
+          item.id === action.id ? { ...item, given: !item.given } : item
         )
       };
 
     case "updatemade":
       return {
         ...state,
-        items: state.items.map((item, i) =>
-          i === action.id ? { ...item, made: !made } : item
+        items: state.items.map(item =>
+          item.id === action.id ? { ...item, made: !item.made } : item
         )
       };
   }

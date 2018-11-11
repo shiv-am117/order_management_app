@@ -17,13 +17,70 @@ class All_orders_given extends Component {
     super(props);
   }
   state = {
-    value: ""
+    value: "",
+    edit: false
   };
 
   search = text => {
     this.setState({
       value: text
     });
+  };
+
+  clickedit = id => {
+    this.setState({
+      edit: true
+    });
+  };
+  clickedited = id => {
+    this.setState({
+      edit: false
+    });
+  };
+
+  nonedit = each => {
+    return (
+      <View>
+        <Text>Name : {each.name}</Text>
+        <Text>Quantity : {each.quantity} grams</Text>
+        <Text>Date : {each.date}</Text>
+        <Text style={styles.modlineheight}>{"\n"}</Text>
+        <View style={styles.buttoncontainer}>
+          <TouchableOpacity
+            style={styles.envelope}
+            onPress={() => this.clickedit(each.id)}
+          >
+            <Text style={styles.button}>Edit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.envelope}
+            onPress={() => this.props.del_order(each.id)}
+          >
+            <Text style={styles.button}>Completed</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
+  edit = each => {
+    return (
+      <View>
+        <Text>Name : {each.name}</Text>
+        <TextInput>Quantity : {each.quantity} grams</TextInput>
+        <Text>Date : {each.date}</Text>
+        <Text style={styles.modlineheight}>{"\n"}</Text>
+        <View style={styles.buttoncontainer}>
+          <TouchableOpacity
+            style={styles.envelope}
+            onPress={() => this.clickedited(each.id)}
+          >
+            <Text style={styles.button}>Edited</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
   render() {
     let filteredcust = this.props.orders.filter(cust => {
@@ -40,22 +97,7 @@ class All_orders_given extends Component {
           {filteredcust.map(each => (
             <View key={each.id}>
               <View style={styles.item}>
-                <Text>Name : {each.name}</Text>
-                <Text>Quantity : {each.quantity} grams</Text>
-                <Text>Date : {each.date}</Text>
-                <Text style={styles.modlineheight}>{"\n"}</Text>
-                <View style={styles.buttoncontainer}>
-                  <TouchableOpacity style={styles.envelope}>
-                    <Text style={styles.button}>Edit</Text>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    style={styles.envelope}
-                    onPress={() => this.props.del_order(each.id)}
-                  >
-                    <Text style={styles.button}>Completed</Text>
-                  </TouchableOpacity>
-                </View>
+                {this.state.edit ? this.edit(each) : this.nonedit(each)}
               </View>
               <Text style={styles.modlineheight}>{"\n"}</Text>
             </View>
